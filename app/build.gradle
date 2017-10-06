@@ -44,4 +44,6 @@ dependencies {
     kapt 'com.google.dagger:dagger-compiler:2.5'
     provided 'javax.annotation:jsr250-api:1.0'
     testCompile 'junit:junit:4.12'
+    compile 'com.hannesdorfmann.mosby3:mvp:3.0.4'
+    compile 'com.hannesdorfmann.mosby3:viewstate:3.0.4'
 }
