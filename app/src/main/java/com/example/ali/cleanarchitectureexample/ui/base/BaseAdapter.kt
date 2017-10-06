@@ -3,8 +3,6 @@ package com.example.ali.cleanarchitectureexample.ui.base
 import android.support.v7.widget.RecyclerView
 import android.view.ViewGroup
 import android.view.LayoutInflater
-import android.view.View
-import com.example.ali.cleanarchitectureexample.ui.feed.adapter.FeedViewHolder
 
 
 /**
