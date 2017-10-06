@@ -11,8 +11,12 @@ class FeedPresenter @Inject constructor(val interactor: FeedInteractor): FeedCon
 
     protected var view: FeedContract.View? = null
 
-    override fun setFeedView(view: FeedContract.View) {
+    override fun onAttach(view: FeedContract.View) {
         this.view = view
+    }
+
+    override fun onDetach() {
+        view = null
     }
 
     override fun getFeedData() {

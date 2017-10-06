@@ -42,7 +42,7 @@ class FeedActivity : AppCompatActivity(), FeedContract.View {
         setContentView(R.layout.activity_feed)
         (application as FeedApp).appComponent?.inject(this)
         setupRecyclerView()
-        presenter.setFeedView(this)
+        presenter.onAttach(this)
         presenter.getFeedData()
     }
 
@@ -58,5 +58,10 @@ class FeedActivity : AppCompatActivity(), FeedContract.View {
 
     override fun onSuccessGetFeedData(data: List<Feed>?) {
         adapter.setData(data)
+    }
+
+    override fun onDestroy() {
+        presenter.onDetach()
+        super.onDestroy()
     }
 }
