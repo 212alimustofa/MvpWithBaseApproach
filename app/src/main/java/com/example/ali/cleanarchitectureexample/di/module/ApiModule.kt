@@ -1,6 +1,7 @@
 package com.example.ali.cleanarchitectureexample.di.module
 
 import com.example.ali.cleanarchitectureexample.api.Api
+import com.example.ali.cleanarchitectureexample.di.scope.ActivityScope
 import dagger.Module
 import dagger.Provides
 import retrofit2.Retrofit
@@ -12,6 +13,6 @@ import javax.inject.Singleton
 @Module
 class ApiModule{
     @Provides
-    @Singleton
+    @ActivityScope
     fun provideApi(retrofit: Retrofit) = retrofit.create(Api::class.java)
 }
