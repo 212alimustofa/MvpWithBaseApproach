@@ -1,6 +1,6 @@
 package com.example.ali.cleanarchitectureexample.di.component
 
-import com.example.ali.cleanarchitectureexample.ui.feed.feedimpl.FeedActivity
+import com.example.ali.cleanarchitectureexample.di.module.ActivityModule
 import com.example.ali.cleanarchitectureexample.di.module.ApiModule
 import com.example.ali.cleanarchitectureexample.di.module.AppModule
 import com.example.ali.cleanarchitectureexample.di.module.NetworkModule
@@ -13,5 +13,5 @@ import javax.inject.Singleton
 @Singleton
 @Component(modules = arrayOf(AppModule::class, NetworkModule::class, ApiModule::class))
 interface AppComponent{
-    fun inject(feedActivity: FeedActivity)
+    fun plus(module: ActivityModule): ActivityComponent
 }

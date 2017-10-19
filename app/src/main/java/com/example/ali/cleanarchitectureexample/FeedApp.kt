@@ -1,8 +1,11 @@
 package com.example.ali.cleanarchitectureexample
 
+import android.app.Activity
 import android.app.Application
+import com.example.ali.cleanarchitectureexample.di.component.ActivityComponent
 import com.example.ali.cleanarchitectureexample.di.component.AppComponent
 import com.example.ali.cleanarchitectureexample.di.component.DaggerAppComponent
+import com.example.ali.cleanarchitectureexample.di.module.ActivityModule
 import com.example.ali.cleanarchitectureexample.di.module.AppModule
 import com.example.ali.cleanarchitectureexample.di.module.NetworkModule
 
@@ -11,6 +14,7 @@ import com.example.ali.cleanarchitectureexample.di.module.NetworkModule
  */
 class FeedApp: Application(){
     var appComponent: AppComponent? = null
+    var activityComponent: ActivityComponent? = null
 
     override fun onCreate() {
         super.onCreate()
@@ -19,5 +23,14 @@ class FeedApp: Application(){
                 .appModule(AppModule(this))
                 .networkModule(NetworkModule(this))
                 .build()
+    }
+
+    fun createActivityComponent(activity: Activity): ActivityComponent?{
+        activityComponent = appComponent?.plus(ActivityModule(activity))
+        return activityComponent
+    }
+
+    fun releaseActivityComponent(){
+        activityComponent = null
     }
 }

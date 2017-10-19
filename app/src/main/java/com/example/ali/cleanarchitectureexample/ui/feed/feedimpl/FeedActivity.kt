@@ -20,6 +20,9 @@ class FeedActivity : AppCompatActivity(), FeedContract.View {
     @Inject
     lateinit var presenter: FeedPresenter
 
+    @Inject
+    lateinit var layoutManager: LinearLayoutManager
+
     var adapter = object : BaseAdapter<Feed, BaseViewHolder<Feed>>() {
         override fun getItemResourceLayout(viewType: Int) = R.layout.feed_card
 
@@ -40,7 +43,7 @@ class FeedActivity : AppCompatActivity(), FeedContract.View {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_feed)
-        (application as FeedApp).appComponent?.inject(this)
+        (application as FeedApp).createActivityComponent(this)?.inject(this)
         setupRecyclerView()
         presenter.onAttach(this)
         presenter.getFeedData()
@@ -48,7 +51,7 @@ class FeedActivity : AppCompatActivity(), FeedContract.View {
 
     private fun setupRecyclerView() {
         rvFeed.setHasFixedSize(true)
-        rvFeed.layoutManager = LinearLayoutManager(this)
+        rvFeed.layoutManager = layoutManager
         rvFeed.adapter = adapter
     }
 
@@ -62,6 +65,7 @@ class FeedActivity : AppCompatActivity(), FeedContract.View {
 
     override fun onDestroy() {
         presenter.onDetach()
+        (application as FeedApp).releaseActivityComponent()
         super.onDestroy()
     }
 }
